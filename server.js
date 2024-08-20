@@ -6,17 +6,17 @@ import { config } from 'dotenv';
 
 config()
 
+const app = express()
 const PORT = process.env.PORT || 5000
-const server = express()
-server.use(express.json())
+app.use(express.json())
 
- server.use('/authors', authorsRoute)
+ app.use('/authors', authorsRoute)
 
  const initServer = async () => {
     try{
         await mongoose.connect(process.env.MONGODB_URI)
 console.log("server collegato con mongodb ")
-server.listen(PORT, () => {
+app.listen(PORT, () => {
 console.log("cosnesione ok, sei sulla porta : " + PORT)
 })
     }
@@ -30,6 +30,7 @@ console.log("cosnesione ok, sei sulla porta : " + PORT)
 
 
 
-// server.listen(port , () =>{
-//     console.log(`Server sulla porta http://localhost:${port}`)
+
+// app.listen(PORT , () =>{
+//     console.log(`Server sulla porta http://localhost:${PORT}`)
 // })

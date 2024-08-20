@@ -33,20 +33,18 @@ authorsRoute.get('/:id',async (req,res, next) => {
 
 authorsRoute.post('/', async (req,res,next) => {
 
-    console.log('POST /authors route hit');
-if(!req.body.name){
-    return res.status(400).json({ error: 'Name is required' });
-}
+    console.log(req.body);
+
     try {
         //salviamo il nuovo utente nel database
-        const newAuthor = new Author({
+        const author = new Author({
             name: req.body.name,
             surname:req.body.surname,
             email:req.body.email
         });
-        await newAuthor.save()
+        await author.save()
         //riceviamo la risposta positiva con i dati del autore
-        res.send(newAuthor); 
+        res.send(author); 
     }
     catch(error){
      next(error)
